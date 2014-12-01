@@ -1,12 +1,13 @@
-angular.module('mosaic', ['puTransclude'])
+angular.module('codinghitchhiker.mosaic', [])
 	.directive('mosaic', function ($rootScope, $window, $interval) {
 		return {
 			restrict: 'AE',
-			template: '<div class="layout"></div><div ng-repeat="column in columns" class="column column{{::$index+1}}"><div ng-repeat="lhs in column" class="item item{{::$index+1}}"><div pu-transclude></div></div></div>',
+			template: '<div class="layout"></div><div ng-repeat="column in columns" class="column column{{::$index+1}}"><div ng-repeat="lhs in column" class="item item{{::$index+1}}"><div mosaic-transclude></div></div></div>',
 			transclude: true,
 			priority: 1001,
 			compile: function ($element, $attr) {
 				var expression = $attr.mosaic;
+				$element.addClass('mosaic');
 
 				// Get left hand side, and right hand side elements
 				var match = expression.match(/^\s*([\s\S]+?)\s+in\s+([\s\S]+?)$/);
@@ -19,7 +20,7 @@ angular.module('mosaic', ['puTransclude'])
 				// Replace lhs in the template for the ngRepeat
 				$element.html($element.html().replace('ng-repeat="lhs in column"', 'ng-repeat="' + lhs + ' in column"'));
 
-				return function ($scope, $element, $attr) {
+				return function ($scope, $element) {
 
 					// Watch the data for changes
 					$scope.$watchCollection(rhs, function (newVal, oldVal) {
@@ -78,4 +79,22 @@ angular.module('mosaic', ['puTransclude'])
 				}
 			}
 		};
+	}).directive('mosaicTransclude', function () {
+		return {
+			restrict: 'EAC',
+			link: function ($scope, $element, $attrs, controller, $transclude) {
+				if (!$transclude) {
+					throw minErr('ngTransclude')('orphan',
+							'Illegal use of ngTransclude directive in the template! ' +
+							'No parent directive that requires a transclusion found. ' +
+							'Element: {0}',
+						startingTag($element));
+				}
+
+				$transclude($scope, function (clone) {
+					$element.empty();
+					$element.append(clone);
+				});
+			}
+		}
 	});
