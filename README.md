@@ -13,6 +13,12 @@ Works with [Bootstrap](http://getbootstrap.com/). Works with IE8 and above, must
 Getting Started
 ======
 
+To install Angular Mosaic, you can simply use bower: 
+
+```
+bower install angular-mosaic --save
+```
+
 Mosaic works very similarly to [ng-repeat](https://code.angularjs.org/1.3.4/docs/api/ng/directive/ngRepeat), except that it doesn't repeat the element that it's on, instead it uses the transcluded element(s) within mosaic.  A quick example of this:
 
 ```
