@@ -1,0 +1,1 @@
+.mosaic>.layout{width:1px;position:absolute;background-color:transparent;border:none;z-index:-9999}.mosaic .column{width:100%;float:left}@media (min-width:768px){.mosaic>.layout{width:2px}.mosaic .column{width:50%}}@media (min-width:992px){.mosaic>.layout{width:3px}.mosaic .column{width:33.3333%}}@media (min-width:1200px){.mosaic>.layout{width:4px}.mosaic .column{width:25%}}
