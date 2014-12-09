@@ -10,7 +10,6 @@ module.exports = {
 	build_dir: 'build',
 	release_dir: 'release',
 
-
 	/**
 	 * This is a collection of file patterns that refer to our app code (the
 	 * stuff in `src/`). These file paths are used in the configuration of
@@ -21,14 +20,11 @@ module.exports = {
 	 * app's unit tests.
 	 */
 	app_files: {
-		js: [ 'src/**/*.js', '!src/**/*.spec.js', '!src/assets/**/*.js' ],
+		js: [ 'src/**/*.js', '!src/**/*.spec.js' ],
 		jsunit: [ 'src/**/*.spec.js' ],
 
-		atpl: [ 'src/app/**/*.tpl.html' ],
-		dtpl: [ 'src/directives/**/*.tpl.html' ],
-
-		html: [ ],
-		less: [ ],
+		html: [ 'src/index.html' ],
+		less: [ 'src/mosaic.less' ],
 
 		assets: []
 	},

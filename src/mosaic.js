@@ -66,7 +66,7 @@ angular.module('codinghitchhiker.mosaic', [])
 						if (timer) {
 							$interval.cancel(timer);
 						}
-						timer = $interval(updateColumns, 10, 1);
+						timer = $interval(updateColumns, 50, 1);
 					}
 
 					// Listen for resize event
