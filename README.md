@@ -1,5 +1,5 @@
 # Mosaic
-### A simple, responsive, [masonry](http://masonry.desandro.com/) like tile/grid system for Angular.
+### A simple, responsive, [masonry](http://masonry.desandro.com/) or [Deckgrid](https://github.com/akoenig/angular-deckgrid) like tile/grid system for Angular.
 
 Works with [Bootstrap](http://getbootstrap.com/). Works with IE8 and above, must include [Respond.js](https://github.com/scottjehl/Respond) for IE8 to work:
 
