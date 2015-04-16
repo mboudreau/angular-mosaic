@@ -5,7 +5,7 @@ angular.module('codinghitchhiker.mosaic', [])
 			template: '<div class="layout"></div><div ng-repeat="column in columns" class="column column{{::$index+1}}"><div ng-repeat="lhs in column" class="item item{{::$index+1}}"><div mosaic-transclude></div></div></div>',
 			transclude: true,
 			priority: 1001,
-			compile: ['$element', '$attr', function ($element, $attr) {
+			compile: function ($element, $attr) {
 				var expression = $attr.mosaic;
 				$element.addClass('mosaic');
 
@@ -77,7 +77,7 @@ angular.module('codinghitchhiker.mosaic', [])
 						angular.element($window).unbind('resize', onResize);
 					});
 				}
-			}]
+			}
 		};
 	}]).directive('mosaicTransclude', function () {
 		return {
