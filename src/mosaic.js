@@ -1,5 +1,5 @@
 angular.module('codinghitchhiker.mosaic', [])
-	.directive('mosaic', function ($rootScope, $window, $interval) {
+	.directive('mosaic', ['$rootScope', '$window','$interval', function ($rootScope, $window, $interval) {
 		return {
 			restrict: 'AE',
 			template: '<div class="layout"></div><div ng-repeat="column in columns" class="column column{{::$index+1}}"><div ng-repeat="lhs in column" class="item item{{::$index+1}}"><div mosaic-transclude></div></div></div>',
@@ -79,10 +79,10 @@ angular.module('codinghitchhiker.mosaic', [])
 				}
 			}
 		};
-	}).directive('mosaicTransclude', function () {
+	}]).directive('mosaicTransclude', function () {
 		return {
 			restrict: 'EAC',
-			link: function ($scope, $element, $attrs, controller, $transclude) {
+			link: ['$scope', '$element', '$attrs', 'controller', '$transclude', function ($scope, $element, $attrs, controller, $transclude) {
 				if (!$transclude) {
 					throw minErr('ngTransclude')('orphan',
 							'Illegal use of ngTransclude directive in the template! ' +
@@ -95,6 +95,6 @@ angular.module('codinghitchhiker.mosaic', [])
 					$element.empty();
 					$element.append(clone);
 				});
-			}
+			}]
 		}
 	});
