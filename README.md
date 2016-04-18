@@ -19,6 +19,11 @@ To install Angular Mosaic, you can simply use bower:
 bower install angular-mosaic --save
 ```
 
+Inject angular-mosaic module into your angular app
+```
+angular.module('myApp', ['codinghitchhiker.mosaic']);
+```
+
 Mosaic works very similarly to [ng-repeat](https://code.angularjs.org/1.3.4/docs/api/ng/directive/ngRepeat), except that it doesn't repeat the element that it's on, instead it uses the transcluded element(s) within mosaic.  A quick example of this:
 
 ```
