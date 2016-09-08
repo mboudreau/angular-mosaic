@@ -82,7 +82,7 @@ angular.module('codinghitchhiker.mosaic', [])
 	}]).directive('mosaicTransclude', function () {
 		return {
 			restrict: 'EAC',
-			link: ['$scope', '$element', '$attrs', 'controller', '$transclude', function ($scope, $element, $attrs, controller, $transclude) {
+			link: function ($scope, $element, $attrs, controller, $transclude) {
 				if (!$transclude) {
 					throw minErr('ngTransclude')('orphan',
 							'Illegal use of ngTransclude directive in the template! ' +
@@ -95,6 +95,6 @@ angular.module('codinghitchhiker.mosaic', [])
 					$element.empty();
 					$element.append(clone);
 				});
-			}]
+			}
 		}
 	});
