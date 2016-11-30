@@ -1,9 +1,9 @@
 (function ( window, angular, undefined ) {
 angular.module('codinghitchhiker.mosaic', [])
-	.directive('mosaic', function ($rootScope, $window, $interval) {
+	.directive('mosaic', ['$rootScope', '$window','$interval', function ($rootScope, $window, $interval) {
 		return {
 			restrict: 'AE',
-			template: '<div class="layout"></div><div ng-repeat="column in columns" class="column column{{::$index+1}}"><div ng-repeat="lhs in column" class="item item{{::$index+1}}"><div mosaic-transclude></div></div></div>',
+			template: '<div class="layout"></div><div ng-repeat="column in columns track by $index" class="column column{{::$index+1}}"><div ng-repeat="lhs in column" class="item item{{::$index+1}}"><div mosaic-transclude></div></div></div>',
 			transclude: true,
 			priority: 1001,
 			compile: function ($element, $attr) {
@@ -16,15 +16,17 @@ angular.module('codinghitchhiker.mosaic', [])
 					throw "Expected expression in form of '_item_ in _collection_' but got '" + expression + "'.";
 				}
 				var lhs = match[1];
-				var rhs = match[2];
+				var rhs = match[2].split(' ');
+				var collection = rhs.shift();
+				var rest = rhs.join(' ');
 
 				// Replace lhs in the template for the ngRepeat
-				$element.html($element.html().replace('ng-repeat="lhs in column"', 'ng-repeat="' + lhs + ' in column"'));
+				$element.html($element.html().replace('ng-repeat="lhs in column"', 'ng-repeat="' + lhs + ' in column ' + rest + '"'));
 
 				return function ($scope, $element) {
 
 					// Watch the data for changes
-					$scope.$watchCollection(rhs, function (newVal, oldVal) {
+					$scope.$watchCollection(collection, function (newVal, oldVal) {
 						updateColumns(newVal !== oldVal);
 					});
 
@@ -47,7 +49,7 @@ angular.module('codinghitchhiker.mosaic', [])
 
 							//TODO: add caching solution for models, if possible
 
-							angular.forEach($scope.$eval(rhs), function (value, index) {
+							angular.forEach($scope.$eval(collection), function (value, index) {
 								index = index % columnCount;
 								if (!columns[index]) {
 									columns[index] = [];
@@ -80,7 +82,7 @@ angular.module('codinghitchhiker.mosaic', [])
 				}
 			}
 		};
-	}).directive('mosaicTransclude', function () {
+	}]).directive('mosaicTransclude', function () {
 		return {
 			restrict: 'EAC',
 			link: function ($scope, $element, $attrs, controller, $transclude) {
@@ -99,4 +101,5 @@ angular.module('codinghitchhiker.mosaic', [])
 			}
 		}
 	});
+
 })( window, window.angular );

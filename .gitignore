@@ -1,0 +1,8 @@
+*.sw*
+*~
+build/
+release/
+node_modules/
+vendor/
+.idea
+*.iml
