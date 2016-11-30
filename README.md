@@ -43,4 +43,4 @@ This will work the same as an ng-repeat since it will only have one column becau
 Example
 ======
 
-[You can play with it via this JSFiddle](https://jsfiddle.net/yzr9oevn/5/)
+[You can play with it via this JSFiddle](https://jsfiddle.net/yzr9oevn/7/)
