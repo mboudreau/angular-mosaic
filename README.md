@@ -39,3 +39,8 @@ Then in your template file, add a simple iterator
 ```
 
 This will work the same as an ng-repeat since it will only have one column because the css file hasn't been set.  For Mosaic to be compatible with all browsers and to exclude the need for javascript to duplicate css media queries logic, a 'layout' element is added within Mosaic.  Depending on the width of this layout element, it will set the amount of columns to display within mosaic
+
+Example
+======
+
+[You can play with it via this JSFiddle](https://jsfiddle.net/yzr9oevn/2/)
